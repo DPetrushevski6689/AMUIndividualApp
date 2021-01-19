@@ -33,6 +33,19 @@ class OrderDetailsViewController: UIViewController,CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         createDatePicker()
+        
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled(){
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager.startUpdatingLocation()
+        }
+        
+        self.orderMap.delegate = self
+        self.orderMap.mapType = .standard
+        self.orderMap.isZoomEnabled = true
+        self.orderMap.isScrollEnabled = true
 
         let query = PFQuery(className: "Orders")
         query.getObjectInBackground(withId: orderId) { (object, error) in
@@ -42,8 +55,20 @@ class OrderDetailsViewController: UIViewController,CLLocationManagerDelegate, MK
                 if let item = object{
                     self.dateLabel.text = item["date"] as! String
                     self.priceLabel.text = item["price"] as! String
+                    
                     self.orderLat = item["lat"] as! Double
                     self.orderLon = item["lon"] as! Double
+                    
+                    print("\(self.orderLat)")
+                    
+                    let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                    let coordinate = CLLocationCoordinate2D(latitude: self.orderLat, longitude: self.orderLon)
+                    let region = MKCoordinateRegion(center: coordinate, span: span)
+                    self.orderMap.setRegion(region, animated: true)
+                    let anno = MKPointAnnotation()
+                    anno.coordinate = coordinate
+                    anno.title = "Order Location"
+                    self.orderMap.addAnnotation(anno)
                     
                     let recId = item["receiverId"] as! String
                     
@@ -58,28 +83,6 @@ class OrderDetailsViewController: UIViewController,CLLocationManagerDelegate, MK
             }
         }
         
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled(){
-            self.locationManager.delegate = self
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            self.locationManager.startUpdatingLocation()
-        }
-        
-        self.orderMap.delegate = self
-        self.orderMap.mapType = .standard
-        self.orderMap.isZoomEnabled = true
-        self.orderMap.isScrollEnabled = true
-        
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let coordinate = CLLocationCoordinate2D(latitude: orderLat, longitude: orderLon)
-        let region = MKCoordinateRegion(center: coordinate, span: span)
-        self.orderMap.setRegion(region, animated: true)
-        let anno = MKPointAnnotation()
-        anno.coordinate = coordinate
-        anno.title = "Order Location"
-        self.orderMap.addAnnotation(anno)
     }
     
     func createDatePicker(){
