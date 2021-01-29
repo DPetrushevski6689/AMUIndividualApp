@@ -157,6 +157,8 @@ class ShoesOrderViewController: UIViewController, CLLocationManagerDelegate, MKM
         let order = PFObject(className: "Orders")
         order["sellerId"] = orderSellerId
         order["receiverId"] = PFUser.current()?.objectId
+        order["itemId"] = itemId
+        order["itemType"] = "ShoesItem"
         order["price"] = orderPrice
         order["lat"] = orderLat
         order["lon"] = orderLon

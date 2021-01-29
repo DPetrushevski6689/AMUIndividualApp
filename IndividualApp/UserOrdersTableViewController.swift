@@ -9,6 +9,9 @@
 import UIKit
 import Parse
 
+var ratingItemId:String = ""
+var ratingItemType:String = ""
+
 class UserOrdersTableViewController: UITableViewController {
     
     var refresher:UIRefreshControl = UIRefreshControl()
@@ -18,6 +21,8 @@ class UserOrdersTableViewController: UITableViewController {
     var statuses = [String]()
     var sellerNames = [String]()
     var sellerSurnames = [String]()
+    var itemIds = [String]() //itemIds za rating
+    var itemTypes = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +98,8 @@ class UserOrdersTableViewController: UITableViewController {
                 for order in objects!{
                     self.prices.append(order["price"] as! String)
                     self.statuses.append(order["status"] as! String)
+                    self.itemIds.append(order["itemId"] as! String)
+                    self.itemTypes.append(order["itemType"] as! String)
                     
                     /*
                     if order["status"] as! String == "Accepted"{
@@ -130,6 +137,20 @@ class UserOrdersTableViewController: UITableViewController {
             if self.dates.count == objects?.count{
                 self.refresher.endRefreshing()
                 self.tableView.reloadData()
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if statuses[indexPath.row] == "Finished"{
+            ratingItemId = itemIds[indexPath.row]
+            ratingItemType = itemTypes[indexPath.row]
+            performSegue(withIdentifier: "toRating", sender: nil)
+        }else{
+            if langFlag == 1{
+                displayAlert(title: "Information", message: "Order is not finished! Rating is not posssible!")
+            }else if langFlag == 2{
+                displayAlert(title: "Информација", message: "Нарачката не е завршена! Рејтинг не е возможен!")
             }
         }
     }

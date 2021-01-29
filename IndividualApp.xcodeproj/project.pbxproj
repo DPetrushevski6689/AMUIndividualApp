@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2831D625C4424D0080D5C8 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2831D525C4424D0080D5C8 /* RatingViewController.swift */; };
 		0A28BBC625B1DB25005ED27F /* shoes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A28BBC525B1DB25005ED27F /* shoes.jpg */; };
 		0A299D8625B06F78006F427E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A299D8525B06F78006F427E /* AppDelegate.swift */; };
 		0A299D8B25B06F78006F427E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A299D8925B06F78006F427E /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A2831D525C4424D0080D5C8 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		0A28BBC525B1DB25005ED27F /* shoes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = shoes.jpg; path = ../../../shoes.jpg; sourceTree = "<group>"; };
 		0A299D8225B06F78006F427E /* IndividualApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IndividualApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A299D8525B06F78006F427E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				0AE56BCC25B260BE004843DF /* UserItemsTableViewCell.swift */,
 				0AE6309225B600CD00BF7E69 /* UserOrdersTableViewController.swift */,
 				0AE6309425B600E600BF7E69 /* UserOrdersTableViewCell.swift */,
+				0A2831D525C4424D0080D5C8 /* RatingViewController.swift */,
 				0AE425CA25B1E60B00B84807 /* PostViewController.swift */,
 				0AE425CC25B1F87800B84807 /* ClothesTableViewController.swift */,
 				0AE425CE25B1F88E00B84807 /* ClothesTableViewCell.swift */,
@@ -287,6 +290,7 @@
 				0AE425CD25B1F87800B84807 /* ClothesTableViewController.swift in Sources */,
 				0AE56BC925B25B99004843DF /* ShoesOrderViewController.swift in Sources */,
 				0AE56BC325B24A9C004843DF /* ClothesDetailsViewController.swift in Sources */,
+				0A2831D625C4424D0080D5C8 /* RatingViewController.swift in Sources */,
 				0AE56BC525B25046004843DF /* ClothesOrderViewController.swift in Sources */,
 				0AE6309125B5FA3F00BF7E69 /* FinishOrderViewController.swift in Sources */,
 				0AE56BC725B25922004843DF /* ShoesDetailsViewController.swift in Sources */,

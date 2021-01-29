@@ -156,6 +156,8 @@ class ClothesOrderViewController: UIViewController, CLLocationManagerDelegate, M
         let order = PFObject(className: "Orders")
         order["sellerId"] = orderSellerId
         order["receiverId"] = PFUser.current()?.objectId
+        order["itemId"] = itemId
+        order["itemType"] = "ClothesItem"
         order["price"] = orderPrice
         order["lat"] = orderLat
         order["lon"] = orderLon

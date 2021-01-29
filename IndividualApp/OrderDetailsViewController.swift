@@ -150,9 +150,19 @@ class OrderDetailsViewController: UIViewController,CLLocationManagerDelegate, MK
                         order["deliveryManId"] = PFUser.current()?.objectId
                         order.saveInBackground(block: { (success, error) in
                             if success{
-                                self.displayAlert(title: "Success", message: "Order Accepted")
+                                if langFlag == 1{
+                                  self.displayAlert(title: "Success", message: "Order Accepted")
+                                }else if langFlag == 2{
+                                   self.displayAlert(title: "Потврда", message: "Прифатена Нарачка")
+                                }
+                                
                             }else{
-                                self.displayAlert(title: "Error", message: (error?.localizedDescription)!)
+                                if langFlag == 1{
+                                    self.displayAlert(title: "Error", message: (error?.localizedDescription)!)
+                                }else if langFlag == 2{
+                                    self.displayAlert(title: "Проблем", message: (error?.localizedDescription)!)
+                                }
+                                
                             }
                         })
                     }

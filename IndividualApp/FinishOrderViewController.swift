@@ -107,16 +107,31 @@ class FinishOrderViewController: UIViewController {
                         item["finishingDate"] = self.finishDateField.text
                         item.saveInBackground(block: { (success, error) in
                             if success{
-                                self.displayAlert(title: "Success", message: "Order finished")
+                                if langFlag == 1{
+                                    self.displayAlert(title: "Success", message: "Order finished")
+                                }else if langFlag == 2{
+                                    self.displayAlert(title: "Потврда", message: "Нарачката е Завршена")
+                                }
+                                
                             }else{
-                                self.displayAlert(title: "Error", message: "Error finishing the order")
+                                if langFlag == 1{
+                                    self.displayAlert(title: "Error", message: "Error finishing the order")
+                                }else if langFlag == 2{
+                                    self.displayAlert(title: "Проблем", message: "Проблем при завршување на нарачката")
+                                }
+                                
                             }
                         })
                     }
                 }
             }
         }else{
-            self.displayAlert(title: "Error", message: "Please enter a finishing date")
+            if langFlag == 1{
+                self.displayAlert(title: "Error", message: "Please enter a finishing date")
+            }else if langFlag == 2{
+                self.displayAlert(title: "Проблем", message: "Внесете датум на завршување")
+            }
+            
         }
     }
     

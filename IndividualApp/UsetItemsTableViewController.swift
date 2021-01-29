@@ -17,6 +17,7 @@ class UsetItemsTableViewController: UITableViewController {
     var prices = [String]()
     var images = [PFFileObject]()
     var statuses = [String]()
+    var ratings = [String]()
 
     var refresher:UIRefreshControl = UIRefreshControl()
     
@@ -56,6 +57,19 @@ class UsetItemsTableViewController: UITableViewController {
 
         cell.brandLabel.text = brands[indexPath.row]
         cell.priceLabel.text = prices[indexPath.row]
+        
+        if ratings[indexPath.row] == "No Rating"{
+            if langFlag == 1{
+                cell.ratingLabel.text = "No Rating"
+            }else if langFlag == 2{
+                cell.ratingLabel.text = "Нема Рејтинг"
+            }
+            
+        }else{
+            cell.ratingLabel.text = ratings[indexPath.row]
+        }
+        
+        //cell.ratingLabel.text = ratings[indexPath.row]
         
         if statuses[indexPath.row] == "Available"{
             if langFlag == 1{
@@ -98,6 +112,7 @@ class UsetItemsTableViewController: UITableViewController {
                     self.images.append(item["image"] as! PFFileObject)
                     self.prices.append(item["price"] as! String)
                     self.statuses.append(item["status"] as! String)
+                    self.ratings.append(item["rating"] as! String)
                 }
                 self.refresher.endRefreshing()
             }
@@ -116,6 +131,7 @@ class UsetItemsTableViewController: UITableViewController {
                     self.images.append(item["image"] as! PFFileObject)
                     self.prices.append(item["price"] as! String)
                     self.statuses.append(item["status"] as! String)
+                    self.ratings.append(item["rating"] as! String)
                 }
                 self.refresher.endRefreshing()
                 

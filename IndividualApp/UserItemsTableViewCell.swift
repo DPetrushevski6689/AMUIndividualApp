@@ -14,6 +14,8 @@ class UserItemsTableViewCell: UITableViewCell {
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    
     
 
     override func awakeFromNib() {

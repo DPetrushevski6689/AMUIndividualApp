@@ -161,6 +161,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 clothesItem["price"] = priceField.text
                 clothesItem["age"] = ageField.text
                 clothesItem["size"] = sizeField.text
+                clothesItem["rating"] = "No Rating"
                 clothesItem["status"] = "Available"
                 if let img = itemImage.image{
                     if let imageData = img.jpeg(.medium){
@@ -203,6 +204,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 shoesItem["price"] = priceField.text
                 shoesItem["age"] = ageField.text
                 shoesItem["size"] = sizeField.text
+                shoesItem["rating"] = "No Rating"
                 shoesItem["status"] = "Available"
                 if let img = itemImage.image{
                     if let imageData = img.jpeg(.medium){
