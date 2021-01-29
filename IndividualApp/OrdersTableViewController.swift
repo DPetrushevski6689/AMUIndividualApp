@@ -19,10 +19,25 @@ class OrdersTableViewController: UITableViewController {
     var orderPrices = [String]()
     var orderStatuses = [String]()
     
+    @IBOutlet weak var logoutNav: UIBarButtonItem!
+    @IBOutlet weak var yourOrdersNav: UIBarButtonItem!
+    
+    
     var refresher:UIRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if langFlag == 1{
+            self.navigationItem.title = "Active Orders"
+            logoutNav.title = "Logout"
+            yourOrdersNav.title = "Your Orders"
+        }else if langFlag == 2{
+            self.navigationItem.title = "Активни Нарачки"
+            logoutNav.title = "Логаут"
+            yourOrdersNav.title = "Ваши Нарачки"
+        }
+        
         updateTable()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresher.addTarget(self, action: #selector(OrdersTableViewController.updateTable), for: UIControl.Event.valueChanged)

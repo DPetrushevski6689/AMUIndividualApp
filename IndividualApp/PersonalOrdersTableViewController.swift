@@ -24,6 +24,13 @@ class PersonalOrdersTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if langFlag == 1{
+            self.navigationItem.title = "Your Orders"
+        }else if langFlag == 2{
+            self.navigationItem.title = "Ваши Нарачки"
+        }
+        
         updateTable()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresher.addTarget(self,action: #selector(PersonalOrdersTableViewController.updateTable), for: UIControl.Event.valueChanged)
@@ -51,10 +58,24 @@ class PersonalOrdersTableViewController: UITableViewController {
         
         if statuses[indexPath.row] == "Accepted"{
             cell.statusLabel.backgroundColor = UIColor.yellow
-            cell.statusLabel.text = statuses[indexPath.row]
+            
+            if langFlag == 1{
+                cell.statusLabel.text = statuses[indexPath.row]
+            }else if langFlag == 2{
+                cell.statusLabel.text = "Прифатена"
+            }
+            
+            
         }else if statuses[indexPath.row] == "Finished"{
             cell.statusLabel.backgroundColor = UIColor.green
-            cell.statusLabel.text = statuses[indexPath.row]
+            
+            if langFlag == 1{
+                cell.statusLabel.text = statuses[indexPath.row]
+            }else if langFlag == 2{
+                cell.statusLabel.text = "Завршена"
+            }
+            
+            
         }
 
         return cell

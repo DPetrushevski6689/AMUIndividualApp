@@ -28,6 +28,9 @@ class ShoesOrderViewController: UIViewController, CLLocationManagerDelegate, MKM
     @IBOutlet weak var orderMap: MKMapView!
     @IBOutlet weak var placeOrderButton: UIButton!
     
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    
     var orderLat = CLLocationDegrees()
     var orderLon = CLLocationDegrees()
     
@@ -35,6 +38,16 @@ class ShoesOrderViewController: UIViewController, CLLocationManagerDelegate, MKM
     override func viewDidLoad() {
         super.viewDidLoad()
         placeOrderButton.isHidden = true
+        
+        if langFlag == 1{
+            self.navigationItem.title = "Order"
+            placeOrderButton.setTitle("Place Order", for: .normal)
+            locationLabel.text = "Please select your order location with a long press"
+        }else if langFlag == 2{
+            self.navigationItem.title = "Нарачај"
+            placeOrderButton.setTitle("Порачај", for: .normal)
+            locationLabel.text = "Изберете ја локацијата за достава со долг стисок"
+        }
         
         let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(longpress(gestureRecognizer:)))
         uilpgr.minimumPressDuration = 2
@@ -162,9 +175,19 @@ class ShoesOrderViewController: UIViewController, CLLocationManagerDelegate, MKM
             activityIndicator.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
             if success{
-                self.displayAlert(title: "Success", message: "Order was placed!")
+                if langFlag == 1{
+                    self.displayAlert(title: "Success", message: "Order was placed!")
+                }else if langFlag == 2{
+                    self.displayAlert(title: "Потврда", message: "Успешна нарачка!")
+                }
+                
             }else{
-                self.displayAlert(title: "Error", message: "Order failed!")
+                if langFlag == 1{
+                    self.displayAlert(title: "Error", message: "Order failed!")
+                }else if langFlag == 2{
+                    self.displayAlert(title: "Проблем", message: "Неуспешна нарачка!")
+                }
+                
             }
         }
     }

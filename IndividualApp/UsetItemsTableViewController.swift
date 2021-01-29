@@ -22,6 +22,14 @@ class UsetItemsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if langFlag == 1{
+            self.navigationItem.title = "Your Products"
+        }else if langFlag == 2{
+            self.navigationItem.title = "Ваши продукти"
+        }
+
+        
         updateClothes()
         updateShoes()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -50,10 +58,20 @@ class UsetItemsTableViewController: UITableViewController {
         cell.priceLabel.text = prices[indexPath.row]
         
         if statuses[indexPath.row] == "Available"{
-            cell.statusLabel.text = statuses[indexPath.row]
+            if langFlag == 1{
+                cell.statusLabel.text = statuses[indexPath.row]
+            }else if langFlag == 2{
+                cell.statusLabel.text = "За продажба"
+            }
+            
             cell.statusLabel.backgroundColor = UIColor.green
         }else if statuses[indexPath.row] == "Sold"{
-            cell.statusLabel.text = statuses[indexPath.row]
+            if langFlag == 1{
+                cell.statusLabel.text = statuses[indexPath.row]
+            }else if langFlag == 2{
+                cell.statusLabel.text = "Продадено"
+            }
+            
             cell.statusLabel.backgroundColor = UIColor.red
         }
         

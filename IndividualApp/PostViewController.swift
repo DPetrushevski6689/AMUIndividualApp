@@ -27,6 +27,9 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     var itemType: Int = -1 //1->clothes, 2->shoes
     
+    @IBOutlet weak var chooseLabel: UILabel!
+    
+    
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     
@@ -43,6 +46,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var chooseImageButton: UIButton!
     @IBOutlet weak var uploadButton: UIButton!
     
+    @IBOutlet weak var orLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +59,38 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         sizeField.isHidden = true
         uploadButton.isHidden = true
         
+        checkLang()
+        
+    }
+    
+    func checkLang(){
+        if langFlag == 2{
+            //mak
+            self.navigationItem.title = "Пост"
+            chooseLabel.text = "Одберете продукт за продажба"
+            orLabel.text = "Или"
+            clothesButton.setTitle("Облека", for: .normal)
+            shoesButton.setTitle("Обувки", for: .normal)
+            chooseImageButton.setTitle("Одберете слика", for: .normal)
+            brandField.placeholder = "Внесете бренд и модел"
+            priceField.placeholder = "Внесете цена"
+            ageField.placeholder = "Внесете старост"
+            sizeField.placeholder = "Внесете големина"
+            uploadButton.setTitle("Прикачи", for: .normal)
+        }else if langFlag == 1{
+            //ang
+            self.navigationItem.title = "Post"
+            chooseLabel.text = "Choose what you want to sell"
+            orLabel.text = "Or"
+            clothesButton.setTitle("Clothes", for: .normal)
+            shoesButton.setTitle("Shoes", for: .normal)
+            chooseImageButton.setTitle("Choose an Image", for: .normal)
+            brandField.placeholder = "Enter the brand and model"
+            priceField.placeholder = "Enter the price"
+            ageField.placeholder = "Enter the item age"
+            sizeField.placeholder = "Enter the size"
+            uploadButton.setTitle("Upload", for: .normal)
+        }
     }
     
     @IBAction func clothesChosen(_ sender: Any) {
@@ -62,7 +98,12 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         secondLabel.isHidden = true
         clothesButton.isHidden = true
         shoesButton.isHidden = true
-        firstLabel.text = "Chosen item: Clothes"
+        if langFlag == 1{
+            firstLabel.text = "Chosen item: Clothes"
+        }else if langFlag == 2{
+            firstLabel.text = "Одбравте Облека"
+        }
+        
         
         itemImage.isHidden = false
         chooseImageButton.isHidden = false
@@ -78,7 +119,13 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         secondLabel.isHidden = true
         clothesButton.isHidden = true
         shoesButton.isHidden = true
-        firstLabel.text = "Chosen item: Shoes"
+        
+        if langFlag == 1{
+            firstLabel.text = "Chosen item: Shoes"
+        }else if langFlag == 2{
+            firstLabel.text = "Одбравте Обувки"
+        }
+        
         
         itemImage.isHidden = false
         chooseImageButton.isHidden = false
@@ -132,9 +179,19 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
                     if success{
-                        self.displayAlert(title: "Success", message: "Item uploaded successfully")
+                        if langFlag == 1{
+                            self.displayAlert(title: "Success", message: "Item uploaded successfully")
+                        }else if langFlag == 2{
+                            self.displayAlert(title: "Потврда", message: "Продуктот е успешно прикачен")
+                        }
+                        
                     }else{
-                        self.displayAlert(title: "Error", message: "Unsuccessful upload")
+                        if langFlag == 1{
+                            self.displayAlert(title: "Error", message: "Unsuccessful upload")
+                        }else if langFlag == 2{
+                            self.displayAlert(title: "Проблем", message: "Неуспешно прикачување")
+                        }
+                        
                     }
                 }
                 
@@ -164,17 +221,37 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
                     if success{
-                        self.displayAlert(title: "Success", message: "Item uploaded successfully")
+                        if langFlag == 1{
+                            self.displayAlert(title: "Success", message: "Item uploaded successfully")
+                        }else if langFlag == 2{
+                            self.displayAlert(title: "Потврда", message: "Продуктот е успешно прикачен")
+                        }
+                        
                     }else{
-                        self.displayAlert(title: "Error", message: "Unsuccessful upload")
+                        if langFlag == 1{
+                            self.displayAlert(title: "Error", message: "Unsuccessful upload")
+                        }else if langFlag == 2{
+                            self.displayAlert(title: "Проблем", message: "Неуспешно прикачување")
+                        }
+                        
                     }
                 }
                 
             }else{
-                displayAlert(title: "Error", message: "You must choose an item type")
+                if langFlag == 1{
+                    displayAlert(title: "Error", message: "You must choose an item type")
+                }else if langFlag == 2{
+                    displayAlert(title: "Проблем", message: "Мора да изберете тип на продукт")
+                }
+                
             }
         }else{
-            displayAlert(title: "Error", message: "All fields must be entered")
+            if langFlag == 1{
+                displayAlert(title: "Error", message: "All fields must be entered")
+            }else if langFlag == 2{
+                displayAlert(title: "Проблем", message: "Сите полиња мора да бидат внесени")
+            }
+            
         }
         
     }

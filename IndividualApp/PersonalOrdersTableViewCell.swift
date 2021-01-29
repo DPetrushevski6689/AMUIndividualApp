@@ -15,11 +15,18 @@ class PersonalOrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusTitleLabel: UILabel!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        if langFlag == 1{
+            statusTitleLabel.text = "Status:"
+        }else if langFlag == 2{
+            statusTitleLabel.text = "Статус:"
+        }
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

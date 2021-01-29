@@ -21,6 +21,12 @@ class UserOrdersTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if langFlag == 1{
+           self.navigationItem.title = "Orders"
+        }else if langFlag == 2{
+            self.navigationItem.title = "Нарачки"
+        }
 
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresher.addTarget(self, action: #selector(UserOrdersTableViewController.updateTable), for: UIControl.Event.valueChanged)
@@ -49,13 +55,28 @@ class UserOrdersTableViewController: UITableViewController {
         cell.sellerLabel.text = sellerNames[indexPath.row] + " " + sellerSurnames[indexPath.row]
         
         if statuses[indexPath.row] == "Accepted"{
-            cell.statusLabel.text = "Accepted"
+            if langFlag == 1{
+                cell.statusLabel.text = "Accepted"
+            }else if langFlag == 2{
+                cell.statusLabel.text = "Прифатена"
+            }
+            
             cell.statusLabel.backgroundColor = UIColor.yellow
         }else if statuses[indexPath.row] == "Finished"{
-            cell.statusLabel.text = "Finished"
+            if langFlag == 1{
+                cell.statusLabel.text = "Finished"
+            }else if langFlag == 2{
+                cell.statusLabel.text = "Завршена"
+            }
+            
             cell.statusLabel.backgroundColor = UIColor.green
         }else if statuses[indexPath.row] == "Active"{
-            cell.statusLabel.text = "Active"
+            if langFlag == 1{
+                cell.statusLabel.text = "Active"
+            }else if langFlag == 2{
+                cell.statusLabel.text = "Активна"
+            }
+            
             cell.statusLabel.backgroundColor = UIColor.cyan
         }
         

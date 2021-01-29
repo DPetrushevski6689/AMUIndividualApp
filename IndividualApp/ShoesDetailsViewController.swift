@@ -19,10 +19,18 @@ class ShoesDetailsViewController: UIViewController {
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     
-
+    @IBOutlet weak var orderButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if langFlag == 1{
+            self.navigationItem.title = "Details"
+            orderButton.setTitle("Order", for: .normal)
+        }else if langFlag == 2{
+            self.navigationItem.title = "Детали"
+            orderButton.setTitle("Купи", for: .normal)
+        }
         let query = PFQuery(className: "Shoes")
         query.getObjectInBackground(withId: itemId) { (object, error) in
             if error != nil{

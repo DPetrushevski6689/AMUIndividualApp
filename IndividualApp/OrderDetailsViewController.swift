@@ -17,12 +17,18 @@ class OrderDetailsViewController: UIViewController,CLLocationManagerDelegate, MK
     
     let orderId = orderObjectId
     
+    @IBOutlet weak var dateTitleLabel: UILabel!
+    @IBOutlet weak var priceTitleLabel: UILabel!
+    @IBOutlet weak var recieverTitleLabel: UILabel!
+    
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var orderMap: MKMapView!
     @IBOutlet weak var deliveryDateField: UITextField!
     @IBOutlet weak var receiverLabel: UILabel!
     
+    @IBOutlet weak var acceptOrderButton: UIButton!
     
     
     let locationManager = CLLocationManager()
@@ -33,6 +39,22 @@ class OrderDetailsViewController: UIViewController,CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         super.viewDidLoad()
         createDatePicker()
+        
+        if langFlag == 1{
+            self.navigationItem.title = "Order Details"
+            dateTitleLabel.text = "Date:"
+            priceTitleLabel.text = "Price:"
+            recieverTitleLabel.text = "Reciever:"
+            deliveryDateField.placeholder = "Enter Delivery Date"
+            acceptOrderButton.setTitle("Accept Order", for: .normal)
+        }else if langFlag == 2{
+            self.navigationItem.title = "Детали за Нарачка"
+            dateTitleLabel.text = "Дата:"
+            priceTitleLabel.text = "Цена:"
+            recieverTitleLabel.text = "Примач:"
+            deliveryDateField.placeholder = "Внесете Датум За Испорака"
+            acceptOrderButton.setTitle("Прими Нарачка", for: .normal)
+        }
         
         self.locationManager.requestWhenInUseAuthorization()
         

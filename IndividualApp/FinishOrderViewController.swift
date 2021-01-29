@@ -18,16 +18,41 @@ class FinishOrderViewController: UIViewController {
     var sellerId:String = ""
     var recId:String = ""
     
+    @IBOutlet weak var sellerTitle: UILabel!
+    @IBOutlet weak var recieverTitle: UILabel!
+    @IBOutlet weak var dateTitle: UILabel!
+    @IBOutlet weak var priceTitle: UILabel!
+    
+    
     @IBOutlet weak var sellerLabel: UILabel!
     @IBOutlet weak var recieverLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var finishDateField: UITextField!
     
-
+    @IBOutlet weak var finishOrderButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createDatePicker()
+        
+        if langFlag == 1{
+            self.navigationItem.title = "Accepted Order"
+            sellerTitle.text = "Seller:"
+            recieverTitle.text = "Reciever:"
+            dateTitle.text = "Date:"
+            priceTitle.text = "Price:"
+            finishDateField.placeholder = "Enter Finishing Date"
+            finishOrderButton.setTitle("Finish Order", for: .normal)
+        }else if langFlag == 2{
+            self.navigationItem.title = "Прифатена Нарачка"
+            sellerTitle.text = "Праќач:"
+            recieverTitle.text = "Примач:"
+            dateTitle.text = "Дата:"
+            priceTitle.text = "Цена:"
+            finishDateField.placeholder = "Внесете датум на завршување"
+            finishOrderButton.setTitle("Заврши Нарачка", for: .normal)
+        }
         
         let query = PFQuery(className: "Orders")
         query.getObjectInBackground(withId: itemId) { (object, error) in

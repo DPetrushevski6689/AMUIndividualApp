@@ -14,6 +14,9 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var birthDateLabel: UITextField!
     let datePicker = UIDatePicker()
     
+    @IBOutlet weak var registerLabel: UILabel!
+    @IBOutlet weak var orLabel: UILabel!
+    
     
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
@@ -39,6 +42,39 @@ class RegisterViewController: UIViewController {
         createDatePicker()
         userButton.isHidden = false
         deliveryButton.isHidden = false
+        checkLang()
+    }
+    
+    func checkLang(){
+        if langFlag == 1{
+            //ang
+            self.navigationItem.title = "Register"
+            registerLabel.text = "Register as a:"
+            userButton.setTitle("User", for: .normal)
+            deliveryButton.setTitle("Delivery Man", for: .normal)
+            orLabel.text = "Or"
+            firstNameField.placeholder = "First Name"
+            lastNameField.placeholder = "Last Name"
+            emailField.placeholder = "Email Address"
+            phoneField.placeholder = "Telephone Number"
+            birthDateLabel.placeholder = "Birth Date"
+            passwordField.placeholder = "Password"
+            registerButton.setTitle("Register", for: .normal)
+        }else if langFlag == 2{
+            //mak
+            self.navigationItem.title = "Регистрација"
+            registerLabel.text = "Регистрирај:"
+            userButton.setTitle("Корисник", for: .normal)
+            deliveryButton.setTitle("Доставувач", for: .normal)
+            orLabel.text = "Или"
+            firstNameField.placeholder = "Име"
+            lastNameField.placeholder = "Презиме"
+            emailField.placeholder = "Е-Адреса"
+            phoneField.placeholder = "Телефонски број"
+            birthDateLabel.placeholder = "Дата на раѓање"
+            passwordField.placeholder = "Лозинка"
+            registerButton.setTitle("Регистрација", for: .normal)
+        }
     }
     
     
@@ -65,16 +101,28 @@ class RegisterViewController: UIViewController {
     @IBAction func userPressed(_ sender: Any) {
         userRole = "User"
         deliveryButton.isHidden = true
-        firstLabel.text = "You have chosen:"
-        secondLabel.text = "User"
+        if langFlag == 1{
+            firstLabel.text = "User"
+            secondLabel.isHidden = true
+         
+        }else if langFlag == 2{
+            firstLabel.text = "Корисник"
+            secondLabel.isHidden = true
+        }
         userButton.isHidden = true
     }
     
     @IBAction func deliveryManPressed(_ sender: Any) {
         userRole = "Delivery"
         userButton.isHidden = true
-        firstLabel.text = "You have chosen:"
-        secondLabel.text = "Delivery Man"
+        if langFlag == 1{
+            firstLabel.text = "Delivery Man"
+            secondLabel.isHidden = true
+        }else if langFlag == 2{
+            firstLabel.text = "Доставувач"
+            secondLabel.isHidden = true
+        }
+        
         deliveryButton.isHidden = true
     }
     
@@ -96,15 +144,29 @@ class RegisterViewController: UIViewController {
                         self.displayAlert(title: "Error", message: err.localizedDescription)
                     }else{
                         print("Sign Up Success")
-                        self.displayAlertReg(title: "Success", message: "You have registered successfully")
+                        if langFlag == 1{
+                           self.displayAlertReg(title: "Success", message: "You have registered successfully")
+                        }else if langFlag == 2{
+                            self.displayAlertReg(title: "Потврда", message: "Успешна регистрација")
+                        }
                         
                     }
                 }
             }else{
-                self.displayAlert(title: "Error", message: "All fields must be entered")
+                if langFlag == 1{
+                    self.displayAlert(title: "Error", message: "All fields must be entered")
+                }else if langFlag == 2{
+                    self.displayAlert(title: "Проблем", message: "Сите полиња мора да бидат внесени")
+                }
+                
             }
         }else{
-            self.displayAlert(title: "Error", message: "Please choose a user type")
+            if langFlag == 1{
+                self.displayAlert(title: "Error", message: "Please choose a user type")
+            }else if langFlag == 2{
+                self.displayAlert(title: "Проблем", message: "Ве молиме изберете тип на корисник")
+            }
+            
         }
     }
     

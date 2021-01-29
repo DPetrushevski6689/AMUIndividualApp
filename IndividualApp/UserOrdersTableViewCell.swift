@@ -15,10 +15,15 @@ class UserOrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     
-
+    @IBOutlet weak var sellerTitle: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        if langFlag == 1{
+            sellerTitle.text = "Seller:"
+        }else if langFlag == 2{
+            sellerTitle.text = "Праќач:"
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

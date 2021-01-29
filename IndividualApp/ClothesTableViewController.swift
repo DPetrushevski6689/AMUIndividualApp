@@ -22,6 +22,13 @@ class ClothesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if langFlag == 1{
+            self.navigationItem.title = "Clothes"
+        }else if langFlag == 2{
+            self.navigationItem.title = "Облека"
+        }
+        
         updateTable()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresher.addTarget(self, action: #selector(ClothesTableViewController.updateTable), for: UIControl.Event.valueChanged)
